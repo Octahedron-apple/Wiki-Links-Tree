@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wikilinksgraph"
+version = "0.1.0"
+description = "Wiki Links Tree Maker, takes in a lot of md files that are interconnected with wiki links(Logseq or Obsidian DBs) and shows their structure"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+]
+
+[project.scripts]
+wikilinksgraph = "wikilinksgraph.main:main"
