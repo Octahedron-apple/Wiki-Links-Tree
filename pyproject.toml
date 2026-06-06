@@ -9,7 +9,9 @@ description = "Wiki Links Tree Maker, takes in a lot of md files that are interc
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
+    "pyvis",
 ]
 
 [project.scripts]
 wikilinksgraph = "wikilinksgraph.main:main"
+wlg = "wikilinksgraph.main:main"
