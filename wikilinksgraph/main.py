@@ -59,7 +59,7 @@ def main():
         reader.Read_file(i)
         
     out_path = reader.Make_Graph()
-    print(f"Graph generated and opened from: {out_path}")
+    print(out_path)
 
 if __name__ == "__main__":
     main()
