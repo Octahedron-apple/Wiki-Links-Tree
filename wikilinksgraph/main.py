@@ -45,3 +45,17 @@ class File_Reader:
                 net.add_edge(source_id, target_id)
                 
         net.show('wiki_graph.html', notebook=False)
+
+def main():
+    import sys
+    path = sys.argv[1] if len(sys.argv) > 1 else "."
+    reader = File_Reader(path)
+    
+    for i in range(len(reader.md_files)):
+        reader.Read_file(i)
+        
+    reader.Make_Graph()
+    print("Graph generated as wiki_graph.html")
+
+if __name__ == "__main__":
+    main()
