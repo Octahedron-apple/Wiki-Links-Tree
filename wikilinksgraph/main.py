@@ -43,7 +43,7 @@ class File_Reader:
             for link in links:
                 target_id = link.split("|")[0].strip()
                 if target_id not in net.get_nodes():
-                    net.add_node(target_id, label=f"{target_id}.md", title=f"{target_id}.md")
+                    net.add_node(target_id, label=f"{target_id}.md", title=f"{target_id}.md", color="red")
                 net.add_edge(source_id, target_id)
                 
         temp_path = str(Path(tempfile.gettempdir()) / 'wiki_graph.html')
