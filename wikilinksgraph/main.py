@@ -1,4 +1,5 @@
 import re
+import tempfile
 from pathlib import Path
 from pyvis.network import Network
 
@@ -26,12 +27,13 @@ class File_Reader:
         self.md_files[file_index][1] = links
 
     def Make_Graph(self):
-        net = Network(directed=False)
+        net = Network(directed=False, cdn_resources='remote')
         
         for file_info in self.md_files:
             file_path = file_info[0]
             node_id = Path(file_path).stem
-            net.add_node(node_id, label=node_id)
+            file_name = Path(file_path).name
+            net.add_node(node_id, label=file_name, title=file_name)
             
         for file_info in self.md_files:
             file_path = file_info[0]
@@ -41,10 +43,12 @@ class File_Reader:
             for link in links:
                 target_id = link.split("|")[0].strip()
                 if target_id not in net.get_nodes():
-                    net.add_node(target_id, label=target_id)
+                    net.add_node(target_id, label=f"{target_id}.md", title=f"{target_id}.md")
                 net.add_edge(source_id, target_id)
                 
-        net.show('wiki_graph.html', notebook=False)
+        temp_path = str(Path(tempfile.gettempdir()) / 'wiki_graph.html')
+        net.show(temp_path, notebook=False)
+        return temp_path
 
 def main():
     import sys
@@ -54,8 +58,8 @@ def main():
     for i in range(len(reader.md_files)):
         reader.Read_file(i)
         
-    reader.Make_Graph()
-    print("Graph generated as wiki_graph.html")
+    out_path = reader.Make_Graph()
+    print(f"Graph generated and opened from: {out_path}")
 
 if __name__ == "__main__":
     main()
